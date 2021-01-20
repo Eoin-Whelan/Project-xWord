@@ -4,9 +4,28 @@ container:
   properties: {html: '@theme:standard-page.html'}
 components:
 - type: ColumnPanel
-  properties: {}
+  properties: {col_widths: '{"UPANUM":50,"HVNLPU":10}'}
   name: content_panel
   layout_properties: {slot: default}
+  components:
+  - type: TextBox
+    properties: {}
+    name: word_input_box
+    layout_properties: {grid_position: 'XWCFBO,UPANUM'}
+    event_bindings: {pressed_enter: text_box_1_pressed_enter}
+  - type: FlowPanel
+    properties: {}
+    name: flow_panel_1
+    layout_properties: {grid_position: 'XWCFBO,HVNLPU'}
+    components:
+    - type: Button
+      properties: {text: button_1}
+      name: search_word_btn
+      layout_properties: {}
+  - type: DataRowPanel
+    properties: {}
+    name: data_row_panel_1
+    layout_properties: {grid_position: 'YYTWZK,HYXBCM'}
 - type: FlowPanel
   properties: {}
   name: navbar_links
