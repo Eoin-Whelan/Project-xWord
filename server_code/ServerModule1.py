@@ -3,7 +3,7 @@ from anvil.google.drive import app_files
 import anvil.server
 from anvil.google.drive import app_files
 
-file = app_fil
+file = app_files.words.txt
 
 @anvil.server.callable
 def determine_cheats():
