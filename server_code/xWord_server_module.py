@@ -1,5 +1,7 @@
 """
-  Title: Server
+  Title:   xWord_server_module
+  Author:  Eoin Farrell
+  DOC:     20/01/2021
 """
 
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
@@ -13,8 +15,10 @@ def import_dictionary():
   fStr = app_files.words_txt.get_bytes()
   fStr = str(fStr, "utf-8")
   fStr = fStr.split()
-  fset = {line.strip("'s").lower() for line in fStr}
-  fSet = sorted(fset)[1:]
+  fSet = {line.strip("'s").lower() for line in fStr}
+  fSet = sorted(fSet)[1::]
+  print(type(fSet))
+
   return fSet
   
 @anvil.server.callable
