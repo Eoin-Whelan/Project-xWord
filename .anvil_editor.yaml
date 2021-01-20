@@ -1,5 +1,5 @@
 unique_ids:
   forms: {Form1: WKKJ3MPK4RBB2ZHDMPCJ4SDEXNTWDXMT}
   modules: {}
-  server_modules: {}
+  server_modules: {ServerModule1: RHVWMTFKINP5DOP73VJISJMHAH6O5PMS}
   assets: {standard-page.html: X4AVKIK4CGGRGNGCYMTX7SJWD6M5P55N, theme.css: MWPO5H5R454G3TY5DICVDKRC6DFTZ7G4}
