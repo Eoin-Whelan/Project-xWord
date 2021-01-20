@@ -7,6 +7,8 @@ import anvil.server
 
 def import_dictionary():
   f = app_files.words_txt.get_bytes()
+  fStr = str(f)
+  print(type(fStr))
   fString = f.decode("utf-8")
   print(type(f))
   print(f[:30])
