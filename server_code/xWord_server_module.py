@@ -1,3 +1,7 @@
+"""
+  Title: Server
+"""
+
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
 from anvil.google.drive import app_files
 import anvil.server
@@ -6,23 +10,11 @@ import anvil.server
 
 
 def import_dictionary():
-  f = app_files.words_txt.get_bytes()
-  fStr = str(f)
-  print(type(fStr))
-  fString = f.decode("utf-8")
-  print(type(f))
-  print(f[:30])
-  print(type(fString))
-  final_string_list = fString.split("\n")
-  final_string = {line.strip("\n").strip("'s)").lower() for line in final_string_list}
-  print(len(f))
-  print(len(final_string_list))
-  print(len(final_string))
-  fSet = sorted(final_string)[1:]
-  print(fSet[-1])
-  #MsgToSet = {line.strip("\n").strip("'s").lower() for line in enumerate(f)}
-  #msgToSet = {v for v in f}
-  #return msgToSet
+  fStr = app_files.words_txt.get_bytes()
+  fStr = str(fStr, "utf-8")
+  fStr = fStr.split()
+  fset = {line.strip("'s").lower() for line in fStr}
+  fSet = sorted(fset)[1:]
   return fSet
   
 @anvil.server.callable
