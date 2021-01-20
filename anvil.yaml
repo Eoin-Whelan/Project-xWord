@@ -38,7 +38,7 @@ services:
       iconLink: https://drive-thirdparty.googleusercontent.com/16/type/text/plain
       headRevisionId: 0B_4jekzk3vpubXJQY3dwMWlsam5IQ083TURLaStnMllvOG5jPQ
       selfLink: https://www.googleapis.com/drive/v2/files/1hq089AkUCvpotK9I4pckxUB99MLkAVip
-      lastViewedByMeDate: '2021-01-20T15:24:58.648Z'
+      lastViewedByMeDate: '2021-01-20T15:26:34.940Z'
       userPermission: {kind: drive#permission, etag: '"U1_PrT_evrbamOxJxyZiNsqVYcw"',
         id: me, selfLink: 'https://www.googleapis.com/drive/v2/files/1hq089AkUCvpotK9I4pckxUB99MLkAVip/permissions/me',
         role: owner, type: user}
@@ -47,7 +47,7 @@ services:
       kind: drive#file
       modifiedByMeDate: '2021-01-20T15:25:08.759Z'
       title: words.txt
-      version: '3'
+      version: '4'
       appDataContents: false
       writersCanShare: true
       fileSize: '976241'
@@ -58,7 +58,7 @@ services:
       quotaBytesUsed: '976241'
       md5Checksum: 7d06f540d0a65a46e6d65c5254edb21f
       originalFilename: words.txt
-      thumbnailLink: https://lh3.googleusercontent.com/l3WRmAfVjEd3ChgWjMMRrTL0L3YgNLNkXEkaM7DU6BEby1PtAeA-K2MCG-GsYUQh_Br-yyB9UR6RNas=s220
+      thumbnailLink: https://lh3.googleusercontent.com/moYAoJSkOcWVVmk2dqlcg07EJ5bkXVcdcWqxbDxwb6ZKACmmoH0u3pJbQM7oc-eR_OpAv4G_8OtN8a8=s220
       ownerNames: [Eoin Farrell]
   server_config: {delegation_refresh_token: 1//03ow6t3GuRUY3CgYIARAAGAMSNwF-L9Ir2WoG97zMyWchjP2ZunSqz2h-_DAF60VauwMq1Ul7Nvb54X-JpAi5DK-fvIGE0krkzcE}
 package_name: C00164354_xWord
