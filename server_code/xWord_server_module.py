@@ -17,19 +17,9 @@ def import_dictionary():
   fStr = fStr.split()
   fSet = {line.strip("'s").lower() for line in fStr}
   fSet = sorted(fSet)[1::]
-  print(type(fSet))
-
   return fSet
   
-@anvil.server.callable
-def determine_cheats():
-    session["previous"] = pattern = request.form["pattern"]
-    session["count"] = 0
-    matches = xword.find_possible_matches(pattern)
-    return render_template(
-        "results.html", the_title="Here are your results", data=sorted(matches)
-    )
-  
+
 def find_possible_matches(pattern):
     """Given any pattern of the type "__a___b__c", this function
        looks up and returns all the potential matches for the
