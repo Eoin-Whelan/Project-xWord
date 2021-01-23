@@ -6,16 +6,14 @@ import anvil.server
 
 class xWord_form(xWord_formTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    anvil.server.call('import_dictionary')
-    # Any code you write here will run when the form opens.
 
 
   def search_word_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    self.pattern_matches_panel.items = anvil.server.call('import_dictionary')
-    pass
+    """search_word_btn_click populates pattern_results repeating panel with items matching entered pattern from word_pattern_box."""
+    
+    # Assigns the items of the repeating panel with the value of
+    self.pattern_matches_panel.items = anvil.server.call('find_possible_matches', self.word_pattern_box.text)
 
 
 

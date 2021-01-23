@@ -15,31 +15,26 @@ def import_dictionary():
   fStr = fStr.split()
   fSet = {line.strip("'s").lower() for line in fStr}
   fSet = sorted(fSet)[1::]
-  print(fSet[:30])
-  return fSet[:30]
+  return fSet
   
-
+@anvil.server.callable
 def find_possible_matches(pattern):
-  
     """Given any pattern of the type "__a___b__c", this function
        looks up and returns all the potential matches for the
        pattern in the Linux dictionary of words."""
-    fStr = app_files.words_txt.get_bytes()
-    fStr = str(fStr, "utf-8")
-    fStr = fStr.split()
-    fSet = {line.strip("'s").lower() for line in fStr}
-    fSet = sorted(fSet)[1::]
+    dict_contents = import_dictionary()
     def match_pattern(w, p):
-        """Returns True if 'w' matches 'p', False otherwise."""
+        #Returns True if 'w' matches 'p', False otherwise.
         letters = {k: v for k, v in enumerate(p) if v != "_"}
         return not any([w[i] != p[i] for i in letters.keys()])
 
     pattern = pattern.lower()  # Just in case...
     matches = {
         word  ## SELECT...
-        for word in words  ## FROM...
+        for word in dict_contents  ## FROM...
         if len(word) == len(pattern) and match_pattern(word, pattern)  ## WHERE...
     }
+    matches = sorted(list(matches))
     return matches
+ 
   
-word_dict = import_dictionary()
