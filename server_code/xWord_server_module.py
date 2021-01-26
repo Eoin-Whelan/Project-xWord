@@ -13,8 +13,9 @@ def import_dictionary():
   fStr = app_files.words_txt.get_bytes()
   fStr = str(fStr, "utf-8")
   fStr = fStr.split()
-  fSet = {line.strip("'s").lower() for line in fStr}
+  fSet = {line.replace("'s", '').lower() for line in fStr}
   fSet = sorted(fSet)[1::]
+  print(fSet[:100:])
   return fSet
   
 @anvil.server.callable
