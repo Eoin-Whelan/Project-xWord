@@ -17,8 +17,14 @@ class xWord_form(xWord_formTemplate):
 
     def search_word_btn_click(self, **event_args):
         """search_word_btn_click populates pattern_results repeating panel with items matching entered pattern from word_pattern_box."""
-
         # Assigns the items of the repeating panel with the value of
         self.pattern_matches_panel.items = anvil.server.call(
             "find_possible_matches", self.word_pattern_box.text
         )
+        if len(self.pattern_matches_panel.items) == 0:
+          self.results_label.text= "No results found!"
+          
+        else:
+          self.results_label.text= "Here are your results:"
+
+
