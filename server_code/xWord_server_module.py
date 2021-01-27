@@ -18,7 +18,7 @@ def import_dictionary():
     """
     fStr = app_files.words_txt.get_bytes()
     fStr = str(fStr, "utf-8")
-    fStr = fStr.split()
+    fStr = fStr.split('\n')
     fSet = {line.replace("'s", "").lower() for line in fStr}
     fSet = sorted(fSet)[1::]
     return fSet
