@@ -12,7 +12,7 @@ import anvil.server
 @anvil.server.callable
 def import_dictionary():
     """
-    import_dictionary imports the words_txt file through the Anvil Google Drive API.
+    Imports the words_txt file through the Anvil Google Drive API.
     It then converts to bytes and casts to a string before applying the string-relevant
     functions to transform and return it as a list.
     """
