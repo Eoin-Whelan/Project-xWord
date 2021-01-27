@@ -15,5 +15,5 @@ class pattern_results(pattern_resultsTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
 
-        # When the item is created, the text of the label is set to the name of the item itself.
+        # When the panel is created, the text label is set to the name of the item itself.
         self.pattern_content_label.text = self.item
