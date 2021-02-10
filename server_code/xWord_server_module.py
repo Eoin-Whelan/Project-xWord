@@ -1,3 +1,6 @@
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 """
   Title:   xWord_server_module
   Author:  Eoin Farrell
@@ -21,6 +24,7 @@ def import_dictionary():
     fStr = fStr.split('\n')
     fSet = {line.replace("'s", "").lower() for line in fStr}
     fSet = sorted(fSet)[1::]
+    print(len(fSet))
     return fSet
 
 
@@ -44,3 +48,29 @@ def find_possible_matches(pattern):
     }
     matches = sorted(list(matches))
     return matches
+  
+@anvil.server.http_endpoint('/stats')
+def stats(**q):
+  new_words = len({result['words'] for result in app_tables.new_words.search()})
+  return {"New words added": new_words, "Old words:": len(import_dictionary())}
+
+@anvil.server.http_endpoint('/add', methods=["POST"], authenticate_users=False)
+def add(**q):
+  new_words = anvil.server.request.body_json['words']
+  new_words_list = list(new_words)
+  print(new_words_list[1])
+  print(type(new_words_list))
+  old_dict = import_dictionary()
+  #print(new_words["words"])
+  if any([word in new_words_list for word in old_dict] or word in new_words_list for word in app_tables.new_words.search()):
+    print("Nice try.")
+    return
+  else:
+    print("All good boss.")
+    return
+    
+
+@anvil.server.http_endpoint('/pattern/:pat')
+def stats(**q):
+  new_words = len({result['words'] for result in app_tables.new_words.search()})
+  return {"New words added": new_words, "Old words:": len(import_dictionary())}
