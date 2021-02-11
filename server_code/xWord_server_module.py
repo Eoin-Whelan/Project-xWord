@@ -1,6 +1,7 @@
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+
 """
   Title:   xWord_server_module
   Author:  Eoin Farrell
@@ -40,7 +41,8 @@ def find_possible_matches(pattern):
     """
     dict_contents = import_dictionary()
     data_table_dict = [result["words"] for result in app_tables.new_words.search()]
-    dict_contents.extend(map(str.lower, data_table_dict))
+    data_table_dict_lower = map(str.lower, data_table_dict)
+    dict_contents.extend(data_table_dict_lower)
 
     def match_pattern(w, p):
         # Returns True if 'w' matches 'p', False otherwise.
@@ -63,8 +65,9 @@ def stats(**q):
     """
     Returns a dict/JSON structure object containing the information.
     """
-    return {"New words: ": len({result['words'] for result
-                    in app_tables.new_words.search()}),
+    new_dict = {result['words'] for result
+                    in app_tables.new_words.search()}
+    return {"New words: ": len(new_dict),
             "Old words: ": len(import_dictionary())}
 
 
@@ -82,9 +85,11 @@ def add(**q):
     """
     new_words = anvil.server.request.body_json['words']
     new_dict = [result["words"] for result in app_tables.new_words.search()]
+    new_words = [word for word in map(str.lower, new_words)]
+    new_dict = [word for word in map(str.lower, new_dict)]
     valid_adds = [
-                    word for word in map(str.lower, new_words)
-                    if word not in map(str.lower, new_dict) and
+                    word for word in new_words
+                    if word not in new_dict and
                     word not in import_dictionary()
                 ]
 
