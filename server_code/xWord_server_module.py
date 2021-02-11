@@ -61,7 +61,7 @@ def find_possible_matches(pattern):
 @anvil.server.http_endpoint('/stats')
 def stats(**q):
     new_words = len({result['words'] for result
-                    in app_tables.new_words.search()})
+                    in map(str.lower, app_tables.new_words.search())})
     return {"New words: ": new_words,
             "Old words: ": len(import_dictionary())}
 
