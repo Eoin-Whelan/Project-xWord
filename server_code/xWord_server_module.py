@@ -85,7 +85,7 @@ def add(**q):
     new_words = [word for word in map(str.lower, new_words)]
     new_dict = [word for word in map(str.lower, new_dict)]
     old_dict = import_dictionary()
-    valid_adds = [word for word in new_words if words not in new_dict and old_dict]
+    valid_adds = [word for word in new_words if word not in new_dict and old_dict]
     """
     valid_adds = [
         word
@@ -99,9 +99,6 @@ def add(**q):
       ]
     )
     """
-    for word in new_words:
-      if word not in new_dict and old_dict:
-        valid_adds.extend(word)
 
     if valid_adds:
         for word in valid_adds:
