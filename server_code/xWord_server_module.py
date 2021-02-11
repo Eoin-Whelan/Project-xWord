@@ -33,7 +33,8 @@ def find_possible_matches(pattern):
     looks up and returns all the potential matches for the
     pattern in the Linux dictionary of words."""
     dict_contents = import_dictionary()
-    dict_contents.extend([result["words"] for result in app_tables.new_words.search()])
+    dict_contents.extend([result["words"] for result
+                          in app_tables.new_words.search()])
     def match_pattern(w, p):
         # Returns True if 'w' matches 'p', False otherwise.
         letters = {k: v for k, v in enumerate(p) if v != "_"}
@@ -65,7 +66,6 @@ def add(**q):
   valid_adds = [word for word in map(str.lower,new_words)
                 if word not in map(str.lower,new_dict)
                 and word not in import_dictionary()]
-  print(valid_adds)
   if(valid_adds):
     for word in valid_adds:
       app_tables.new_words.add_row(words=word)
