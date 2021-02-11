@@ -26,7 +26,7 @@ def import_dictionary():
     """
     fStr = app_files.words_txt.get_bytes()
     fStr = str(fStr, "utf-8")
-    fStr = fStr.split('\n')
+    fStr = fStr.split("\n")
     fSet = {line.replace("'s", "").lower() for line in fStr}
     fSet = sorted(fSet)[1::]
     return fSet
@@ -53,25 +53,22 @@ def find_possible_matches(pattern):
     matches = {
         word  # SELECT...
         for word in dict_contents  # FROM...
-        if len(word) == len(pattern)and
-        match_pattern(word, pattern)  # WHERE...
+        if len(word) == len(pattern) and match_pattern(word, pattern)  # WHERE...
     }
     matches = sorted(list(matches))
     return matches
 
 
-@anvil.server.http_endpoint('/stats')
+@anvil.server.http_endpoint("/stats")
 def stats(**q):
     """
     Returns a dict/JSON structure object containing the information.
     """
-    new_dict = {result['words'] for result
-                    in app_tables.new_words.search()}
-    return {"New words: ": len(new_dict),
-            "Old words: ": len(import_dictionary())}
+    new_dict = {result["words"] for result in app_tables.new_words.search()}
+    return {"New words: ": len(new_dict), "Old words: ": len(import_dictionary())}
 
 
-@anvil.server.http_endpoint('/add', methods=["POST"], authenticate_users=False)
+@anvil.server.http_endpoint("/add", methods=["POST"], authenticate_users=False)
 def add(**q):
     """
     add API endpoint allows the passing of a
@@ -79,31 +76,31 @@ def add(**q):
     A new list is built from the compliment set of
     new_words compared to the old dictionary (text file)
     and new dictionary (data table) contents.
-    
+
     Provided the list is not null (i.e. at least one non-duplicate),
     it's contents are added to the new words dictionary table.
     """
-    new_words = anvil.server.request.body_json['words']
+    new_words = anvil.server.request.body_json["words"]
     new_dict = [result["words"] for result in app_tables.new_words.search()]
     new_words = [word for word in map(str.lower, new_words)]
     new_dict = [word for word in map(str.lower, new_dict)]
     valid_adds = [
-                    word for word in new_words
-                    if word not in new_dict and
-                    word not in import_dictionary()
-                ]
+        word
+        for word in new_words
+        if word not in new_dict and word not in import_dictionary()
+    ]
 
-    if(valid_adds):
+    if valid_adds:
         for word in valid_adds:
             app_tables.new_words.add_row(words=word)
 
 
-@anvil.server.http_endpoint('/pattern/:pat')
+@anvil.server.http_endpoint("/pattern/:pat")
 def pattern(pat):
     """
     pattern API endpoint takes an argument passed in via the :pat
     variable and creates a dictionary of the results. That is returned
-    as a 
+    as a
     """
-    result = {'matches': find_possible_matches(pat)}
+    result = {"matches": find_possible_matches(pat)}
     return find_possible_matches(pat)

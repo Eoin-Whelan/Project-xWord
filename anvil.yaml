@@ -58,7 +58,7 @@ services:
       quotaBytesUsed: '976241'
       md5Checksum: 7d06f540d0a65a46e6d65c5254edb21f
       originalFilename: words.txt
-      thumbnailLink: https://lh3.googleusercontent.com/sr2Cs6mUVRuB-yvpF6aml6VxPaaeUHjaH7kmBRuHWCCBTE4FtDqFSo-0HjYYPSfd9Gc5b56BxJfeHB8=s220
+      thumbnailLink: https://lh3.googleusercontent.com/wgmE4IvRtlLxmIdPj0C2Vsv4ZIsbsVD9UTsBswnkwq373U5rUzjS9Pkn2tQYzSIX-0gqIv1jHvETeqI=s220
       ownerNames: [Eoin Farrell]
   server_config: {delegation_refresh_token: 1//03ow6t3GuRUY3CgYIARAAGAMSNwF-L9Ir2WoG97zMyWchjP2ZunSqz2h-_DAF60VauwMq1Ul7Nvb54X-JpAi5DK-fvIGE0krkzcE}
 - source: /runtime/services/tables.yml
