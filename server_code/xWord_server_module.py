@@ -56,13 +56,13 @@ def stats(**q):
 @anvil.server.http_endpoint('/add', methods=["POST"], authenticate_users=False)
 def add(**q):
   new_words = anvil.server.request.body_json['words']
-  new_words_list = list(new_words)
   old_dict = import_dictionary()
   new_dict = [result["words"] for result in app_tables.new_words.search()]
-  valid_adds = [word for word in map(str.lower,new_words) if word not in map(str.lower,new_dict) and word not in old_dict]
+  valid_adds = [word for word in map(str.lower,new_words) if word not in map(str.lower,new_dict) and word not in import_dictionary()]
   print(valid_adds)
-  for word in valid_adds:
-    app_tables.new_words.add_row(words=word)
+  if(valid_adds):
+    for word in valid_adds:
+      app_tables.new_words.add_row(words=word)
     
 
 @anvil.server.http_endpoint('/pattern/:pat')
