@@ -62,8 +62,8 @@ def find_possible_matches(pattern):
 def stats(**q):
     new_words = len({result['words'] for result
                     in app_tables.new_words.search()})
-    return {"New words added": new_words,
-            "Old words:": len(import_dictionary())}
+    return {"New words: ": new_words,
+            "Old words: ": len(import_dictionary())}
 
 
 @anvil.server.http_endpoint('/add', methods=["POST"], authenticate_users=False)
