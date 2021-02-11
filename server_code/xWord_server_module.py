@@ -55,10 +55,16 @@ def stats(**q):
 
 @anvil.server.http_endpoint('/add', methods=["POST"], authenticate_users=False)
 def add(**q):
+  """add API endpoint allows the passing of a JSON object which is parsed to a dict new_words.
+  A new list is built from the set difference of new_words compared to the old dictionary (text file)
+  and new dictionary (data table) contents. Provided the list is not null (i.e. at least one non-duplicate),
+  it's contents are added to the new words dictionary table.
+  """
   new_words = anvil.server.request.body_json['words']
-  old_dict = import_dictionary()
   new_dict = [result["words"] for result in app_tables.new_words.search()]
-  valid_adds = [word for word in map(str.lower,new_words) if word not in map(str.lower,new_dict) and word not in import_dictionary()]
+  valid_adds = [word for word in map(str.lower,new_words)
+                if word not in map(str.lower,new_dict)
+                and word not in import_dictionary()]
   print(valid_adds)
   if(valid_adds):
     for word in valid_adds:
