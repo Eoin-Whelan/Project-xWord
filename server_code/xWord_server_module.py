@@ -84,11 +84,24 @@ def add(**q):
     new_dict = [result["words"] for result in app_tables.new_words.search()]
     new_words = [word for word in map(str.lower, new_words)]
     new_dict = [word for word in map(str.lower, new_dict)]
+    old_dict = import_dictionary()
+    valid_adds = [word for word in new_words if words not in new_dict and old_dict]
+    """
     valid_adds = [
         word
         for word in new_words
-        if word not in new_dict and word not in import_dictionary()
+        if word not in new_dict
     ]
+    valid_adds.extend([
+        word
+        for word in valid_adds
+        if word not in import_dictionary()
+      ]
+    )
+    """
+    for word in new_words:
+      if word not in new_dict and old_dict:
+        valid_adds.extend(word)
 
     if valid_adds:
         for word in valid_adds:
