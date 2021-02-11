@@ -84,6 +84,7 @@ def add(**q):
                     if word not in map(str.lower, new_dict) and
                     word not in import_dictionary()
                 ]
+    
     if(valid_adds):
         for word in valid_adds:
             app_tables.new_words.add_row(words=word)
