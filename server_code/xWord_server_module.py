@@ -39,8 +39,9 @@ def find_possible_matches(pattern):
     pattern in the Linux dictionary of words.
     """
     dict_contents = import_dictionary()
-    dict_contents.extend([result["words"] for result
-                          in app_tables.new_words.search()])
+    data_table_dict = [result["words"] for result
+                          in app_tables.new_words.search()]
+    dict_contents.extend(map(str.lower, data_table_dict))
 
     def match_pattern(w, p):
         # Returns True if 'w' matches 'p', False otherwise.
@@ -61,7 +62,7 @@ def find_possible_matches(pattern):
 @anvil.server.http_endpoint('/stats')
 def stats(**q):
     new_words = len({result['words'] for result
-                    in map(str.lower, app_tables.new_words.search())})
+                    in app_tables.new_words.search()})
     return {"New words: ": new_words,
             "Old words: ": len(import_dictionary())}
 
