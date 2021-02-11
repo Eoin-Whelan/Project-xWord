@@ -24,7 +24,6 @@ def import_dictionary():
     fStr = fStr.split('\n')
     fSet = {line.replace("'s", "").lower() for line in fStr}
     fSet = sorted(fSet)[1::]
-    print(len(fSet))
     return fSet
 
 
@@ -34,7 +33,7 @@ def find_possible_matches(pattern):
     looks up and returns all the potential matches for the
     pattern in the Linux dictionary of words."""
     dict_contents = import_dictionary()
-
+    dict_contents.extend([result["words"] for result in app_tables.new_words.search()])
     def match_pattern(w, p):
         # Returns True if 'w' matches 'p', False otherwise.
         letters = {k: v for k, v in enumerate(p) if v != "_"}
@@ -58,16 +57,12 @@ def stats(**q):
 def add(**q):
   new_words = anvil.server.request.body_json['words']
   new_words_list = list(new_words)
-  print(new_words_list[1])
-  print(type(new_words_list))
   old_dict = import_dictionary()
-  #print(new_words["words"])
-  if any([word in new_words_list for word in old_dict] or word in new_words_list for word in app_tables.new_words.search()):
-    print("Nice try.")
-    return
-  else:
-    print("All good boss.")
-    return
+  new_dict = [result["words"] for result in app_tables.new_words.search()]
+  valid_adds = [word for word in map(str.lower,new_words_list) if word not in map(str.lower,new_dict) and word not in old_dict]
+  print(valid_adds)
+  for word in valid_adds:
+    app_tables.new_words.add_row(words=word)
     
 
 @anvil.server.http_endpoint('/pattern/:pat')
