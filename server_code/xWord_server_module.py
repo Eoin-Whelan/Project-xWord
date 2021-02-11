@@ -39,8 +39,7 @@ def find_possible_matches(pattern):
     pattern in the Linux dictionary of words.
     """
     dict_contents = import_dictionary()
-    data_table_dict = [result["words"] for result
-                          in app_tables.new_words.search()]
+    data_table_dict = [result["words"] for result in app_tables.new_words.search()]
     dict_contents.extend(map(str.lower, data_table_dict))
 
     def match_pattern(w, p):
@@ -61,9 +60,11 @@ def find_possible_matches(pattern):
 
 @anvil.server.http_endpoint('/stats')
 def stats(**q):
-    new_words = len({result['words'] for result
-                    in app_tables.new_words.search()})
-    return {"New words: ": new_words,
+    """
+    Returns a dict/JSON structure object containing the information.
+    """
+    return {"New words: ": len({result['words'] for result
+                    in app_tables.new_words.search()}),
             "Old words: ": len(import_dictionary())}
 
 
@@ -75,6 +76,7 @@ def add(**q):
     A new list is built from the compliment set of
     new_words compared to the old dictionary (text file)
     and new dictionary (data table) contents.
+    
     Provided the list is not null (i.e. at least one non-duplicate),
     it's contents are added to the new words dictionary table.
     """
@@ -93,6 +95,10 @@ def add(**q):
 
 @anvil.server.http_endpoint('/pattern/:pat')
 def pattern(pat):
+    """
+    pattern API endpoint takes an argument passed in via the :pat
+    variable and creates a dictionary of the results. That is returned
+    as a 
+    """
     result = {'matches': find_possible_matches(pat)}
-    print(result['matches'])
     return find_possible_matches(pat)
