@@ -88,7 +88,7 @@ def add(**q):
     new_dict = [word for word in map(str.lower, new_dict)]
     old_dict = import_dictionary()
     # List of valid (i.e. "new" words) non-existent in either dictionary
-    valid_adds = [word for word in new_words if word not in new_dict and old_dict]
+    valid_adds = [word for word in new_words if word not in new_dict and word not in old_dict]
 
     # If the list has contents, it is passed to the new_words table.
     if valid_adds:
