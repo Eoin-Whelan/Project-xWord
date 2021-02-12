@@ -80,26 +80,17 @@ def add(**q):
     Provided the list is not null (i.e. at least one non-duplicate),
     it's contents are added to the new words dictionary table.
     """
+    # Take the words passed in & format them in lowercase.
     new_words = anvil.server.request.body_json["words"]
-    new_dict = [result["words"] for result in app_tables.new_words.search()]
     new_words = [word for word in map(str.lower, new_words)]
+    # Pull the current dictionary contents in.
+    new_dict = [result["words"] for result in app_tables.new_words.search()]
     new_dict = [word for word in map(str.lower, new_dict)]
     old_dict = import_dictionary()
+    # List of valid (i.e. "new" words) non-existent in either dictionary
     valid_adds = [word for word in new_words if word not in new_dict and old_dict]
-    """
-    valid_adds = [
-        word
-        for word in new_words
-        if word not in new_dict
-    ]
-    valid_adds.extend([
-        word
-        for word in valid_adds
-        if word not in import_dictionary()
-      ]
-    )
-    """
 
+    # If the list has contents, it is passed to the new_words table.
     if valid_adds:
         for word in valid_adds:
             app_tables.new_words.add_row(words=word)
