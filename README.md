@@ -3,5 +3,7 @@ Python project built with the Anvil platform. Primarily used to learn Anvil's AP
 
 If you wish to use the dictionary file you can download it from my Google Drive using [this link](https://drive.google.com/file/d/1hq089AkUCvpotK9I4pckxUB99MLkAVip/view?usp=sharing). Once you have the file accessible to the Anvil platform via the available APIs (or your own method), just tie it into the import_dictionary function and you're all set!
 
-If you'd like to import this to your own Anvil account and toy around with it feel free by using the link below:
+If you'd like to see the app in action without all the cloning you can [here!](https://c00164354-xword.anvil.app/)
+
+Or if you wish to import this to your own Anvil account and toy around with it feel free by using the link below:
 [![Project Link](https://i.imgur.com/QQQOskt.png)](https://anvil.works/build#clone:FONOLVFJSJL3P3U2=KMJUCJXIELGZ6WL3P2FHIARS)
